@@ -37,14 +37,12 @@ public class List {
     
     /** GIVE Textual representation of this list. */
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("(");
-        Node current = first;
-        while (current != null) {
-    	    builder.append(current.cp);
-    	    current = current.next;
+        String builder = "(";
+        for (int i = 0; i < size; i++) {
+            builder += this.listIterator(i);
         }
-        return (builder + ")").toString();
+        return builder + ")";
+        
     }
 
     /** Returns the index of the first CharData object in this list
