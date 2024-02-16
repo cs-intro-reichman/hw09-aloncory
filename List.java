@@ -39,7 +39,7 @@ public class List {
     public String toString() {
         String builder = "(";
         for (int i = 0; i < size; i++) {
-            builder += this.listIterator(i) + " ";
+            builder += this.listIterator(i).current + " ";
         }
         return builder.substring(0,builder.length() - 1) + ")";
     }
@@ -136,5 +136,14 @@ public class List {
         }
         // Returns an iterator that starts in that element
 	    return new ListIterator(current);
+    }
+
+    public static void main(String[] args) {
+        List lst = new List();
+        String str = "committee_";
+        for (char ch: str.toCharArray()){
+            lst.update(ch);
+        }
+        System.out.println(lst);
     }
 }
