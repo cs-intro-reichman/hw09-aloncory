@@ -38,13 +38,38 @@ public class LanguageModel {
 
     // Computes and sets the probabilities (p and cp fields) of all the
 	// characters in the given list. */
-	public void calculateProbabilities(List probs) {				
-		// Your code goes here
+	public void calculateProbabilities(List probs) {
+        int totalChars = 0;	
+        // Computes how many characters exist in total
+        for (int i = 0; i < probs.getSize(); i++) {
+            totalChars += probs.listIterator(i).current.cp.count;
+        }
+        // For each character in the given list, this loop computes and set it's probabilities (p and cp fields)
+        for (int i = 0; i < probs.getSize(); i++) {
+            ListIterator iter = probs.listIterator(i);
+            CharData currentChar = iter.current.cp;
+            CharData previousChar = (i == 0) ? null : probs.listIterator(i - 1).current.cp;
+            currentChar.p = (double) currentChar.count / totalChars;
+            if (i == 0) {
+                currentChar.cp = currentChar.p;
+            } else {
+                currentChar.cp = currentChar.p + previousChar.cp;
+            }
+        }
 	}
 
     // Returns a random character from the given probabilities list.
 	public char getRandomChar(List probs) {
-		// Your code goes here
+		double r = Math.random(); // Drawing a random number in [0,1)
+        int i = 0;
+        /* Iterates the list, reading the cumulative probabilities
+        (the cp fields) as we go along.*/
+        while ((i < probs.getSize()) && (probs.listIterator(i).current.cp.cp < r)) {
+            i++;
+        } 
+        /* Stops at the element whose cumulative probability is greater than
+        r, and returns the character of this element */
+        return probs.get(i).chr;
 	}
 
     /**
@@ -69,6 +94,15 @@ public class LanguageModel {
 	}
 
     public static void main(String[] args) {
-		// Your code goes here
+        LanguageModel test = new LanguageModel(0);
+        List lst = new List();
+        String str = "committee_";
+        for (char ch: str.toCharArray()) {
+            lst.update(ch);
+        }
+        test.calculateProbabilities(lst);
+        for (int i = 0; i < 10000000; i++) {
+            System.out.println(test.getRandomChar(lst));
+        }
     }
 }

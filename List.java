@@ -138,12 +138,4 @@ public class List {
 	    return new ListIterator(current);
     }
 
-    public static void main(String[] args) {
-        List lst = new List();
-        String str = "committee_";
-        for (char ch: str.toCharArray()){
-            lst.update(ch);
-        }
-        System.out.println(lst);
-    }
 }
