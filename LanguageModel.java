@@ -123,10 +123,4 @@ public class LanguageModel {
 		}
 		return str.toString();
 	}
-    public static void main(String[] args) {
-        LanguageModel test = new LanguageModel(2);
-        String str = "you_cannot_teach_a_man_anything;_you_can_only_help_him_find_it_within_himself.";
-
-
-    }
 }
