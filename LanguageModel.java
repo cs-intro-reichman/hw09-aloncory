@@ -92,17 +92,4 @@ public class LanguageModel {
 		}
 		return str.toString();
 	}
-
-    public static void main(String[] args) {
-        LanguageModel test = new LanguageModel(0);
-        List lst = new List();
-        String str = "committee_";
-        for (char ch: str.toCharArray()) {
-            lst.update(ch);
-        }
-        test.calculateProbabilities(lst);
-        for (int i = 0; i < 10000000; i++) {
-            System.out.println(test.getRandomChar(lst));
-        }
-    }
 }
