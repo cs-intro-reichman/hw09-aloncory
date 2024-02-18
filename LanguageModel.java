@@ -121,7 +121,7 @@ public class LanguageModel {
         String generatedText = window;
         /* The text generation process stops when the length of the generated text equals the desired
            text length, as specified by the user.*/
-        while ((generatedText.length() < textLength)) {   
+        while ((generatedText.length() < textLength + windowLength)) {   
             List currentList = CharDataMap.get(window);
             /* In any iteration, if the current window is not found in the map, we stop the process and
                return the text that was generated so far. */
